@@ -16,15 +16,7 @@ Content for collapsible drawer layout.
              :host {
                 display: block;
             }
-
-            .content-title h3 {
-                color: #757575;
-                text-align: center;
-                text-transform: uppercase;
-                font-family: sans-serif;
-                margin: 0;
-            }
-
+            
             #content-wrap {
                 min-height: 500px;
                 display: flex;
@@ -63,18 +55,19 @@ Content for collapsible drawer layout.
                     flex-wrap: nowrap;
                 }
             }
-                
                 .content-body {
                 flex: 0 1 100%;
             }
+
         </style>
 
 
         <div id="content-wrap">
             <div class='content-body'>{{body}}</div>
-            <div class="lrns-prev-next-button prev"><paper-icon-button icon="hardware:keyboard-arrow-left"></paper-icon-button></div>
-            <div class="lrns-prev-next-button next"><paper-icon-button icon="hardware:keyboard-arrow-right"></paper-icon-button></div>
+            <div class="lrns-prev-next-button prev"><paper-icon-button on-tap="prevBtn" icon="hardware:keyboard-arrow-left"></paper-icon-button></div>
+            <div class="lrns-prev-next-button next"><paper-icon-button on-tap="nextBtn" icon="hardware:keyboard-arrow-right"></paper-icon-button></div>
         </div>
+
 
     </template>
 
@@ -90,8 +83,22 @@ Content for collapsible drawer layout.
                     reflectToAttribute: true
                 },
 
-
+                selected: {
+                    type: String,
+                    value: ''
+                }
             },
+
+            prevBtn: function() {
+                console.log ('Content moves left');
+            },
+
+            nextBtn: function() {
+                console.log ('Content moves right');
+            },
+
+
+              
 
         });
     </script>
