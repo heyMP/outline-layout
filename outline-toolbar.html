@@ -1,0 +1,84 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-layout/app-header/app-header.html">
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+
+<!--
+`outline-toolbar`
+Toolbar for collapsible layout.
+
+@demo demo/index.html
+-->
+
+<dom-module id="outline-toolbar">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      app-toolbar {
+        color: gray;
+        border-bottom: 2px solid whitesmoke;
+        margin-left: 85px;
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      paper-icon-button:hover {
+        color: #000;
+      }
+
+      app-header {
+        color: #fff;
+      }
+
+      .title {
+        margin-left: 10px;
+        max-width: 50%;
+      }
+
+      .menu-button {
+        margin-left: 25px;
+      }
+
+
+    </style>
+   
+    <div header-container>
+      <app-header reveals fixed>
+        <app-toolbar>
+          <div class="menu-btn-wrap">
+            <paper-icon-button class="menu-button" icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+          </div>
+          <div main-title class="title">[[main-title]]</div>
+        </app-toolbar>
+      </app-header>
+    </div>
+   
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'outline-toolbar',
+
+      properties: {
+        /**
+         * The main title.
+         */
+        mainTitle: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true,
+        },
+      },
+
+    });
+  </script>
+</dom-module>

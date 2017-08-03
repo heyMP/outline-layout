@@ -1,0 +1,53 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="outline-content.html">
+<link rel="import" href="outline-toolbar.html">
+<link rel="import" href="outline-drawer.html">
+
+<!--
+`outline-layout`
+Collapsible drawer layout with shifting content.
+
+@demo demo/index.html
+-->
+
+<dom-module id="outline-layout">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+
+</style>
+
+  <outline-drawer>
+      <outline-content body="Donec rutrum congue leo eget malesuada. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.  Donec rutrum congue leo eget malesuada. Donec sollicitudin molestie malesuada. 
+        Vivamus suscipit tortor eget felis porttitor volutpat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.  Donec sollicitudin molestie malesuada.  Donec rutrum congue leo eget malesuada. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. 
+        Donec sollicitudin molestie malesuada.">
+      </outline-content>
+      <outline-drawer-content>
+          <lrndesign-stepper-button title="Lesson 1: Read this Text" icon="book" location="start"></lrndesign-stepper-button>
+          <lrndesign-stepper-button title="Lesson 2: Watch Videos" icon="av:play-circle-filled" location="middle"></lrndesign-stepper-button>
+          <lrndesign-stepper-button title="Lesson 3: Quiz" icon="assignment-turned-in" location="middle"></lrndesign-stepper-button>
+          <lrndesign-stepper-button title="Lesson 1: Discuss" icon="social:people" location="end"></lrndesign-stepper-button>
+      </outline-drawer-content>
+   </outline-drawer>
+    
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'outline-layout',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'Outline-Layout',
+        },
+      },
+
+    });
+  </script>
+</dom-module>

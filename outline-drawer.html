@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-layout/app-layout.html">
+<link rel="import" href="../app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../app-layout/app-header/app-header.html">
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../lrndesign-stepper/lrndesign-stepper.html">
+<link rel="import" href="../paper-search/paper-search-bar.html">
+
+<!--
+`outline-drawer`
+Collapsible drawer.
+
+@demo demo/index.html
+-->
+
+<dom-module id="outline-drawer">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        --app-drawer-scrim-background: transparent;
+        --app-drawer-width: 250px;
+      }
+
+       :host[opened] ::shadow outline-content {
+        margin-left: 300px;
+      }
+
+       :host[opened] outline-toolbar {
+        margin-left: 255px;
+      }
+
+       :host[opened] ::shadow lrnsys-prev-next-buttons {
+        margin-left: 250px;
+      }
+
+       ::shadow outline-content {
+        transition: all .2s ease-in-out;
+      }
+
+       ::shadow lrnsys-prev-next-buttons {
+        transition: all .2s ease-in-out;
+      }
+
+      
+
+      outline-toolbar {
+        transition: all .2s ease-in-out;
+      }
+
+      app-drawer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 0;
+        --app-drawer-content-container: {
+          background-color: #fafafa;
+          padding: 10px;
+          z-index: 10;
+          border-right: 1px solid #c8c8c8;
+          overflow: inherit;
+        }
+      }
+
+      lrndesign-stepper-button {
+        --lrndesign-stepper-btn-active: #f6f7f7;
+      }
+
+      .course-title-drawer {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 10px 0 0 25px;
+        padding: 10px 0 10px;
+      }
+
+
+    </style>
+   
+ 
+   <div class="master-container">
+      <app-drawer id="drawer" opened="{{opened}}">
+        <paper-search-bar hide-filter-button="false"></paper-search-bar>
+        <div class="course-title-drawer">Course Outline</div>
+        <div class="stepper-button-wrapper">
+          <content select="outline-drawer-content"></content>
+        </div>
+      </app-drawer>
+      <outline-toolbar main-title="My Course"></outline-toolbar>
+      <content></content>
+    </div>
+    
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'outline-drawer',
+
+      properties: {
+        opened: {
+          type: Boolean,
+          reflectToAttribute: true
+        }
+      },
+
+    });
+  </script>
+</dom-module>
