@@ -15,7 +15,7 @@ Toolbar for collapsible layout.
 <dom-module id="outline-toolbar">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
       }
 
@@ -46,9 +46,11 @@ Toolbar for collapsible layout.
         margin-left: 30px;
       }
 
-
+      app-toolbar {
+        margin-left: 0px;
+      }
     </style>
-   
+
     <div header-container>
       <app-header reveals fixed>
         <app-toolbar>
@@ -59,7 +61,7 @@ Toolbar for collapsible layout.
         </app-toolbar>
       </app-header>
     </div>
-   
+
 
   </template>
 

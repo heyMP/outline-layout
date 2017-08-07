@@ -1,0 +1,88 @@
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+
+<dom-module id="outline-content-2">
+    <template>
+        <style>
+             :host {
+                display: block;
+            }
+
+            #content-wrap {
+                min-height: 500px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            .content-body {
+                position: relative;
+                padding: 10px 25px 15px 25px;
+                font-family: sans-serif;
+                font-size: 14px;
+            }
+
+
+            .lrns-prev-next-button {
+                display: flex;
+                flex: 0 1 50%;
+                justify-content: center;
+                align-items: center;
+            }
+
+            @media screen and (min-width: 600px) {
+                #content-wrap .prev {
+                    order: 0;
+                }
+                #content-wrap .content-body {
+                    order: 1;
+                    flex: 1 1 auto;
+                }
+                #content-wrap .next {
+                    order: 2;
+                }
+                #content-wrap {
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                }
+            }
+
+            .content-body {
+                flex: 0 1 100%;
+            }
+        </style>
+
+        <div id="content-wrap">
+            <div class='content-body'>
+                Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie roll carrot cake. Cake pastry marshmallow
+                ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu macaroon muffin gummies. Candy pudding
+                cake cake lollipop. Cheesecake ice cream jelly beans carrot cake. Marzipan sugar plum chocolate marshmallow
+                dragée chupa chups jelly beans dragée cupcake. Danish tart lemon drops tart chupa chups. Jelly-o candy canes
+                ice cream chupa chups. Danish croissant icing gingerbread gummies. Jelly cheesecake caramels brownie carrot
+                cake brownie jujubes tootsie roll. Gummies gummies candy fruitcake. Halvah topping gingerbread toffee powder.
+                Cookie cupcake tart jelly beans biscuit. Candy powder apple pie jelly muffin sugar plum. Gingerbread carrot
+                cake chocolate bar chocolate cake cake cheesecake jelly-o lollipop. Gummi bears biscuit jujubes gummi bears
+                candy danish biscuit. Jujubes fruitcake pie candy canes bear claw sweet roll. Ice cream lollipop jelly beans
+                wafer. Muffin powder jelly-o wafer donut tootsie roll carrot cake. Cake pastry marshmallow ice cream tart
+                cookie tiramisu gingerbread. Pastry dessert tiramisu macaroon muffin gummies. Candy pudding cake cake lollipop.
+                Cheesecake ice cream jelly beans carrot cake. Marzipan sugar plum chocolate marshmallow dragée chupa chups
+                jelly beans dragée cupcake. Danish tart lemon drops tart chupa chups. Jelly-o candy canes ice cream chupa
+                chups. Danish croissant icing gingerbread gummies. Jelly cheesecake caramels brownie carrot cake brownie
+                jujubes tootsie roll. Gummies gummies candy fruitcake. Halvah topping gingerbread toffee powder. Cookie cupcake
+                tart jelly beans biscuit. Candy powder apple pie jelly muffin sugar plum. Gingerbread carrot cake chocolate
+                bar chocolate cake cake cheesecake
+            </div>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'outline-content-2',
+            properties: {
+                tl: {
+                    type: Object
+                },
+            },
+
+        });
+    </script>
+</dom-module>

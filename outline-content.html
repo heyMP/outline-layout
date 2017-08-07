@@ -1,6 +1,11 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-icons/hardware-icons.html">
+<link rel="import" href="../paper-stepper/paper-stepper.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="outline-content-1.html">
+<link rel="import" href="outline-content-2.html">
+<link rel="import" href="outline-content-3.html">
 
 
 <!--
@@ -16,59 +21,24 @@ Content for collapsible drawer layout.
              :host {
                 display: block;
             }
-            
-            #content-wrap {
-                min-height: 500px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-            }
-
-            .content-body {
-                position: relative;
-                padding: 10px 25px 15px 25px;
-                font-family: sans-serif;
-                font-size: 14px;
-            }
-
-
-            .lrns-prev-next-button {
-                display: flex;
-                flex: 0 1 50%;
-                justify-content: center;
-                align-items: center;
-            }
-
-            @media screen and (min-width: 600px) {
-                #content-wrap .prev {
-                    order: 0;
-                }
-                #content-wrap .content-body {
-                    order: 1;
-                    flex: 1 1 auto;
-                }
-                #content-wrap .next {
-                    order: 2;
-                }
-                #content-wrap {
-                    flex-direction: row;
-                    flex-wrap: nowrap;
-                }
-            }
-                .content-body {
-                flex: 0 1 100%;
-            }
-
         </style>
 
+        <!--Pages-->
+        <iron-pages selected="[[activePage]]">
+            <outline-content-1></outline-content-1>
+            <outline-content-2></outline-content-2>
+            <outline-content-3></outline-content-3>
+        </iron-pages>
 
-        <div id="content-wrap">
-            <div class='content-body'>{{body}}</div>
-            <div class="lrns-prev-next-button prev"><paper-icon-button on-tap="prevBtn" icon="hardware:keyboard-arrow-left"></paper-icon-button></div>
-            <div class="lrns-prev-next-button next"><paper-icon-button on-tap="nextBtn" icon="hardware:keyboard-arrow-right"></paper-icon-button></div>
-        </div>
-
-
+        <!--Counter-->
+        <template is="dom-if" if="[[count]]">
+            <paper-stepper selected="{{activePage}}">
+                <template is="dom-repeat" items="[[_countToArray(count)]]">
+                    <paper-step></paper-step>
+                </template>
+            </paper-stepper>
+        </template>
+    </template>
     </template>
 
     <script>
@@ -77,24 +47,34 @@ Content for collapsible drawer layout.
             is: 'outline-content',
 
             properties: {
-                body: {
+                activePage: {
                     type: String,
-                    value: '',
-                    reflectToAttribute: true
+                    value: 0
                 },
+                count: {
+                    type: Number,
+                    value: 0
+                }
             },
-
-            prevBtn: function() {
-                console.log ('Content moves left');
+            _countToArray: function (count) {
+                var array = [];
+                if (count) {
+                    for (i = 0; i < count; i++) {
+                        array.push(i);
+                    }
+                }
+                console.log(array);
+                return array;
             },
-
-            nextBtn: function() {
-                console.log ('Content moves right');
-            },
-
-
-              
-
+            ready: function () {
+                var root = this;
+                var ironPages = root.$$('iron-pages');
+                if (ironPages.children) {
+                    if (ironPages.children.length) {
+                        root.count = ironPages.children.length;
+                    }
+                }
+            }
         });
     </script>
 </dom-module>
