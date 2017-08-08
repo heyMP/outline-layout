@@ -1,7 +1,7 @@
 <dom-module id="outline-content-3">
     <template>
         <style>
-             :host {
+                          :host {
                 display: block;
             }
 
@@ -14,9 +14,17 @@
 
             .content-body {
                 position: relative;
-                padding: 10px 50px 15px 50px;
+                padding: 10px 25px 15px 25px;
                 font-family: sans-serif;
                 font-size: 14px;
+            }
+
+
+            .lrns-prev-next-button {
+                display: flex;
+                flex: 0 1 50%;
+                justify-content: center;
+                align-items: center;
             }
 
             @media screen and (min-width: 600px) {
@@ -43,11 +51,8 @@
 
         <div id="content-wrap">
             <div class='content-body'>
-                Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie roll carrot cake. Cake pastry marshmallow
-                ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu macaroon muffin gummies. Candy powder
-                apple pie jelly muffin sugar plum. Gingerbread carrot cake chocolate bar chocolate cake cake cheesecake jelly-o
-                lollipop. Gummi bears biscuit jujubes gummi bears candy danish biscuit. Jujubes fruitcake pie candy canes
-                bear claw sweet roll.
+                <h1>{{title}}</h1>
+                <p>{{body}}</p>
             </div>
         </div>
 
@@ -61,6 +66,16 @@
             properties: {
                 tl: {
                     type: Object
+                },
+                body: {
+                    type: String,
+                    value: '',
+                    reflectToAttribute: true
+                },
+                title: {
+                    type: String,
+                    value: '',
+                    reflectToAttribute: true
                 },
             },
 
