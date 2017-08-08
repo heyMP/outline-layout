@@ -15,6 +15,10 @@ visualization of steps
        :host {
         display: block;
       }
+
+      :host ::shadow lrndesign-stepper {
+        margin-left: 20px;
+      }
     </style>
 
     <div class="buttons">
@@ -43,7 +47,6 @@ visualization of steps
             else {
               child.setAttribute('location', 'middle');
             }
-            console.log(child, index);
           });
         }
       }

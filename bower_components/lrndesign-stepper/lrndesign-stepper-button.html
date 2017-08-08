@@ -152,7 +152,7 @@ visualization of steps
           <div class="node-title">[[title]]</div>
         </div>
       </paper-button>
-      <iron-collapse>
+      <iron-collapse opened="{{opened}}">
       <div>
         <content></content>
       </div>
@@ -226,6 +226,11 @@ visualization of steps
           notify: true,
           value: false,
         },
+        opened: {
+          type: Boolean,
+          reflectToAttribute: true,
+          nofity:true
+        }
       },
       /**
        * Toggling collapse on an iron element.

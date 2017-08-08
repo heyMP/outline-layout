@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "title": "Lesson 1",
+      "url": "node/5",
+      "icon": "book",
+      "children": [{
+          "title": "Lesson 1 Page 1",
+          "url": "node/6",
+          "icon": "book"
+        },
+        {
+          "title": "Lesson 1 Page 2",
+          "url": "node/7",
+          "icon": "book",
+          "children": [{
+            "title": "Lesson 1 Page blah",
+            "url": "node/13",
+            "icon": "book",
+            "children": [{
+              "title": "hey",
+              "url":"node/15",
+              "icon": "book"
+            }]
+          }]
+        },
+        {
+          "title": "Lesson 1 Video",
+          "url": "node/8",
+          "icon": "av:play-circle-filled"
+        }
+      ]
+    },
+    {
+      "title": "Lesson 2",
+      "url": "node/9",
+      "icon": "book",
+      "children": [{
+          "title": "Lesson 2 Page 1",
+          "url": "node/10",
+          "icon": "book"
+        },
+        {
+          "title": "Lesson 2 Page 2",
+          "url": "node/11",
+          "icon": "book"
+        },
+        {
+          "title": "Lesson 2 Video",
+          "url": "node/12",
+          "icon": "av:play-circle-filled"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="outline-content.html">
 <link rel="import" href="outline-toolbar.html">
 <link rel="import" href="outline-drawer.html">
 <link rel="import" href="../paper-stepper/paper-stepper.html">
@@ -7,6 +6,8 @@
 <link rel="import" href="outline-content-1.html">
 <link rel="import" href="outline-content-2.html">
 <link rel="import" href="outline-content-3.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="outline-drawer-menu.html">
 
 <!--
 `outline-layout`
@@ -27,31 +28,7 @@ Collapsible drawer layout with shifting content.
 
       <!--Pages-->
       <div class="outline-content">
-        <iron-pages selected="[[activePage]]">
-
-          <outline-content-1 title="Jujubes fruitcake pie" body="Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie roll carrot cake. Cake pastry marshmallow
-                ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu macaroon muffin gummies. Candy pudding
-                cake cake lollipop. Cheesecake ice cream jelly beans carrot cake. Marzipan sugar plum chocolate marshmallow
-                dragée chupa chups jelly beans dragée cupcake.
-                Danish tart lemon drops tart chupa chups. Jelly-o candy canes
-                ice cream chupa chups. Danish croissant icing gingerbread gummies. Jelly cheesecake caramels brownie carrot
-                cake brownie jujubes tootsie roll. Gummies gummies candy fruitcake. Halvah topping gingerbread toffee powder.
-                Cookie cupcake tart jelly beans biscuit. Candy powder apple pie jelly muffin sugar plum. Gingerbread carrot
-                cake chocolate bar chocolate cake cake cheesecake jelly-o lollipop. Gummi bears biscuit jujubes gummi bears
-                candy danish biscuit. Jujubes fruitcake pie candy canes bear claw sweet roll."></outline-content-1>
-          <outline-content-2 title="Jujubes fruitcake pie" body="Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie roll carrot cake. Cake pastry marshmallow
-                ice cream tart cookie tiramisu gingerbread. Halvah topping gingerbread toffee powder.
-                Cookie cupcake tart jelly beans biscuit. Candy powder apple pie jelly muffin sugar plum. Gingerbread carrot
-                cake chocolate bar chocolate cake cake cheesecake jelly-o lollipop. Gummi bears biscuit jujubes gummi bears
-                candy danish biscuit. Jujubes fruitcake pie candy canes bear claw sweet roll."></outline-content-2>
-          <outline-content-3 title="Jujubes fruitcake pie" body="Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie roll carrot cake. Cake pastry marshmallow
-                ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu macaroon muffin gummies. Candy pudding
-                cake cake lollipop. Cheesecake ice cream jelly beans carrot cake. Marzipan sugar plum chocolate marshmallow
-                dragée chupa chups jelly beans dragée cupcake."></outline-content-3>
-
-        </iron-pages>
-
-
+        <content></content>
         <!--Counter-->
         <template is="dom-if" if="[[count]]">
           <paper-stepper selected="{{activePage}}">
@@ -62,18 +39,23 @@ Collapsible drawer layout with shifting content.
         </template>
       </div>
 
-        <outline-drawer-content>
-          <div class="tab-wrapper">
-            <div class="tabs">
-              <lrndesign-stepper-button class="tab" title="Lesson 1: Read this Text" icon="book" location="start"></lrndesign-stepper-button>
-              <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" location="middle"></lrndesign-stepper-button>
-              <lrndesign-stepper-button class="tab" title="Lesson 3: Quiz" icon="assignment-turned-in" location="middle"></lrndesign-stepper-button>
-              <lrndesign-stepper-button class="tab" title="Lesson 1: Discuss" icon="social:people" location="end"></lrndesign-stepper-button>
-            </div>
+      <outline-drawer-content>
+        <div class="tab-wrapper">
+          <div class="tabs">
+            <template is="dom-if" if="[[menu]]">
+              <template is="dom-repeat" items="[[menu]]" as="item">
+                <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
+              </template>
+            </template>
           </div>
-        </outline-drawer-content>
-        
-  </outline-drawer>
+        </div>
+      </outline-drawer-content>
+
+    </outline-drawer>
+
+    <template is="dom-if" if="[[menuUrl]]">
+      <iron-ajax auto url="[[menuUrl]]" handle-as="json" on-response="_handleMenuResponse"></iron-ajax>
+    </template>
 
   </template>
 
@@ -85,22 +67,33 @@ Collapsible drawer layout with shifting content.
       properties: {
         activePage: {
           type: String,
-          value: 0
+          value: 1,
+          reflectToAttribute: true
         },
         count: {
           type: Number,
           value: 0
         },
-        body: {
-          type: String,
-          value: '',
-          reflectToAttribute: true
+        menu: {
+          type: Object,
+          value: null
         },
-        title: {
+        menuUrl: {
           type: String,
-          value: '',
-          reflectToAttribute: true
+          value: null
         },
+        activeUrl: {
+          type: String,
+          value: null
+        }
+      },
+      observer: [
+        '_activePageChanged(menu, activeUrl)'
+      ],
+      _activePageChanged: function (menu, activeUrl) {
+      },
+      changeContent: function () {
+        activePage = "2";
       },
       _countToArray: function (count) {
         var array = [];
@@ -109,17 +102,23 @@ Collapsible drawer layout with shifting content.
             array.push(i);
           }
         }
-        console.log(array);
         return array;
+      },
+      _handleMenuResponse: function (e) {
+        var menu = e.detail.response.data;
+        if (typeof menu !== 'undefined') {
+          this.set('menu', menu);
+        }
+        console.log(e.detail.response);
       },
       ready: function () {
         var root = this;
-        var ironPages = root.$$('iron-pages');
-        if (ironPages.children) {
-          if (ironPages.children.length) {
-            root.count = ironPages.children.length;
-          }
-        }
+        // var ironPages = root.$$('iron-pages');
+        // if (ironPages.children) {
+        //   if (ironPages.children.length) {
+        //     root.count = ironPages.children.length;
+        //   }
+        // }
       }
     });
   </script>

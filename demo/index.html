@@ -1,31 +1,49 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>outline-layout demo</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <title>outline-layout demo</title>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../outline-layout.html">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-      .vertical-section-container {
-        max-width: 80%;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>outline-layout demo</h3>
-      <demo-snippet>
-        <template>
-          <outline-layout></outline-layout>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../outline-layout.html">
+
+  <style is="custom-style" include="demo-pages-shared-styles">
+    .vertical-section-container {
+      max-width: 80%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>outline-layout demo</h3>
+    <demo-snippet>
+      <template>
+        <outline-layout menu-url="data.json" active-url="node/12">
+          <div>
+            <p>Jujubes fruitcake pie" body="Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie
+              roll carrot cake. Cake pastry marshmallow ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu
+              macaroon muffin gummies. Candy pudding cake cake lollipop. Cheesecake ice cream jelly beans carrot cake. Marzipan
+              sugar plum chocolate marshmallow dragée chupa chups jelly beans dragée cupcake.</p>
+            <p>Jujubes fruitcake pie" body="Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie
+              roll carrot cake. Cake pastry marshmallow ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu
+              macaroon muffin gummies. Candy pudding cake cake lollipop. Cheesecake ice cream jelly beans carrot cake. Marzipan
+              sugar plum chocolate marshmallow dragée chupa chups jelly beans dragée cupcake.</p>
+            <p>Jujubes fruitcake pie" body="Ice cream lollipop jelly beans wafer. Muffin powder jelly-o wafer donut tootsie
+              roll carrot cake. Cake pastry marshmallow ice cream tart cookie tiramisu gingerbread. Pastry dessert tiramisu
+              macaroon muffin gummies. Candy pudding cake cake lollipop. Cheesecake ice cream jelly beans carrot cake. Marzipan
+              sugar plum chocolate marshmallow dragée chupa chups jelly beans dragée cupcake.</p>
+          </div>
+        </outline-layout>
+      </template>
+    </demo-snippet>
+  </div>
+</body>
+
 </html>

@@ -1,0 +1,93 @@
+<link rel="import" href="../lrndesign-stepper/lrndesign-stepper.html">
+
+<dom-module id="outline-drawer-menu">
+  <template>
+    <style>
+       :host {
+        display: block;
+      }
+    </style>
+
+    
+    <template is="dom-if" if="[[menu]]">
+      <lrndesign-stepper>
+        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" collapsible data-url$="[[menu.url]]" opened="[[opened]]">
+          <template is="dom-if" if="[[menu.children]]">
+            <template is="dom-repeat" items="[[menu.children]]" as="item">
+              <outline-drawer-menu menu="[[item]]" opened=[[opened]]></outline-drawer-menu>
+            </template>
+          </template>
+        </lrndesign-stepper-button>
+      </lrndesign-stepper>
+    </template>
+    
+    <!--<lrndesign-stepper>
+      <lrndesign-stepper-button class="tab" title="Lesson 1: Read this Text" icon="book" collapsible>
+        <lrndesign-stepper>
+          <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>
+            <lrndesign-stepper>
+              <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
+              <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>
+                <lrndesign-stepper>
+                  <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
+                  <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
+                </lrndesign-stepper>
+              </lrndesign-stepper-button>
+            </lrndesign-stepper>
+          </lrndesign-stepper-button>
+          <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
+        </lrndesign-stepper>
+      </lrndesign-stepper-button>
+      <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled"></lrndesign-stepper-button>
+      <lrndesign-stepper-button class="tab" title="Lesson 3: Quiz" icon="assignment-turned-in"></lrndesign-stepper-button>
+      <lrndesign-stepper-button class="tab" title="Lesson 1: Discuss" icon="social:people"></lrndesign-stepper-button>
+      <lrndesign-stepper>-->
+
+  </template>
+  <script>
+    Polymer({
+      is: 'outline-drawer-menu',
+      properties: {
+        menu: {
+          type: Object,
+          value: null
+        },
+        activeUrl: {
+          type: String,
+          value: null
+        },
+        opened: {
+          type: Boolean,
+          value: false,
+          notify: true
+        }
+      },
+      observers: [
+        '_statusOpened(menu, activeUrl)'
+      ],
+      _statusOpened: function (menu, activeUrl) {
+        var root = this;
+        if (typeof menu !== 'undefined' && menu) {
+          if (typeof activeUrl !== 'undefined' && activeUrl) {
+            this._searchObject(menu, activeUrl);
+          }
+        }
+      },
+      _searchObject: function (obj, query) {
+        var root = this;
+        for (var key in obj) {
+          var value = obj[key];
+          if (typeof value === 'object') {
+            root._searchObject(value, query);
+          }
+          if (typeof value === 'array') {
+            root._searchObject(value, query);
+          }
+          if (value === query) {
+            root.set('opened', true);
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>
