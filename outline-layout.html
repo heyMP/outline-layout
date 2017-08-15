@@ -22,13 +22,26 @@ Collapsible drawer layout with shifting content.
        :host {
         display: block;
       }
+
+      .outline-content {
+        display: flex;
+        justify-content: center;
+      }
+
+      .outline-content-text {
+        padding-top: 2em;
+        padding-bottom: 2em;
+        max-width: 60em;
+      }
     </style>
 
     <outline-drawer>
 
       <!--Pages-->
       <div class="outline-content">
-        <content></content>
+        <div class="outline-content-text">
+          <content></content>
+        </div>
         <!--Counter-->
         <template is="dom-if" if="[[count]]">
           <paper-stepper selected="{{activePage}}">
