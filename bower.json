@@ -16,7 +16,6 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7",
     "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.0",
     "paper-progress": "PolymerElements/paper-progress#^1.0.0",
-    "paper-search": "Collaborne/paper-search#^1.4.0",
     "lrndesign-stepper": "LRNWebComponents/lrndesign-stepper#^0.0.6"
   }
 }
