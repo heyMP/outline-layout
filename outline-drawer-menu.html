@@ -10,7 +10,7 @@
 
     <template is="dom-if" if="[[menu]]">
       <lrndesign-stepper>
-        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" collapsible data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]">
+        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]">
           <template is="dom-if" if="[[menu.children]]">
             <template is="dom-repeat" items="[[menu.children]]" as="item">
               <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
