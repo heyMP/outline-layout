@@ -35,7 +35,7 @@ Collapsible drawer layout with shifting content.
       }
     </style>
 
-    <outline-drawer>
+    <outline-drawer id="drawer">
 
       <!--Pages-->
       <div class="outline-content">
@@ -53,8 +53,8 @@ Collapsible drawer layout with shifting content.
       </div>
 
       <outline-drawer-content>
-        <div class="tab-wrapper">
-          <div class="tabs">
+        <div>
+          <div>
             <template is="dom-if" if="[[menu]]">
               <template is="dom-repeat" items="[[menu]]" as="item">
                 <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
@@ -98,11 +98,20 @@ Collapsible drawer layout with shifting content.
         activeUrl: {
           type: String,
           value: null
+        },
+        isDesktop: {
+          type: Boolean,
+          value: false
         }
       },
       observer: [
-        '_activePageChanged(menu, activeUrl)'
+        '_activePageChanged(menu, activeUrl)',
+        '_isDesktopChanged(isDesktop)'
       ],
+      _isDesktopChanged: function (isDesktop) {
+        if (isDesktop) {
+        }
+      },
       _activePageChanged: function (menu, activeUrl) {
       },
       changeContent: function () {
@@ -125,14 +134,13 @@ Collapsible drawer layout with shifting content.
         console.log(e.detail.response);
       },
       ready: function () {
-        var root = this;
-        // var ironPages = root.$$('iron-pages');
-        // if (ironPages.children) {
-        //   if (ironPages.children.length) {
-        //     root.count = ironPages.children.length;
-        //   }
-        // }
-      }
+        setTimeout(function() {
+          var activeButton = document.querySelector('[data-active-page]');
+          if (activeButton) {
+            activeButton.scrollIntoView({'behavior': 'smooth', 'block': 'center', 'inline': 'center'});
+          }
+        }, 1000);
+      },
     });
   </script>
 </dom-module>

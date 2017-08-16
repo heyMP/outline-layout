@@ -8,40 +8,17 @@
       }
     </style>
 
-    
     <template is="dom-if" if="[[menu]]">
       <lrndesign-stepper>
-        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" collapsible data-url$="[[menu.url]]" opened="[[opened]]">
+        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" collapsible data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]">
           <template is="dom-if" if="[[menu.children]]">
             <template is="dom-repeat" items="[[menu.children]]" as="item">
-              <outline-drawer-menu menu="[[item]]" opened=[[opened]]></outline-drawer-menu>
+              <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
             </template>
           </template>
         </lrndesign-stepper-button>
       </lrndesign-stepper>
     </template>
-    
-    <!--<lrndesign-stepper>
-      <lrndesign-stepper-button class="tab" title="Lesson 1: Read this Text" icon="book" collapsible>
-        <lrndesign-stepper>
-          <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>
-            <lrndesign-stepper>
-              <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
-              <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>
-                <lrndesign-stepper>
-                  <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
-                  <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
-                </lrndesign-stepper>
-              </lrndesign-stepper-button>
-            </lrndesign-stepper>
-          </lrndesign-stepper-button>
-          <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled" collapsible>Lesson 2</lrndesign-stepper-button>
-        </lrndesign-stepper>
-      </lrndesign-stepper-button>
-      <lrndesign-stepper-button class="tab" title="Lesson 2: Watch Videos" icon="av:play-circle-filled"></lrndesign-stepper-button>
-      <lrndesign-stepper-button class="tab" title="Lesson 3: Quiz" icon="assignment-turned-in"></lrndesign-stepper-button>
-      <lrndesign-stepper-button class="tab" title="Lesson 1: Discuss" icon="social:people"></lrndesign-stepper-button>
-      <lrndesign-stepper>-->
 
   </template>
   <script>
@@ -58,35 +35,35 @@
         },
         opened: {
           type: Boolean,
-          value: false,
+          value: true,
           notify: true
+        },
+        isActivePage: {
+          type: Boolean,
+          value: false
         }
+      },
+      listeners: {
+        'active-child': '_hasActiveChild'
       },
       observers: [
         '_statusOpened(menu, activeUrl)'
       ],
       _statusOpened: function (menu, activeUrl) {
         var root = this;
+        console.log(menu.url, activeUrl);
         if (typeof menu !== 'undefined' && menu) {
           if (typeof activeUrl !== 'undefined' && activeUrl) {
-            this._searchObject(menu, activeUrl);
+            if (activeUrl === menu.url) {
+              root.opened = true;
+              root.isActivePage = true;
+              root.fire('active-child');
+            }
           }
         }
       },
-      _searchObject: function (obj, query) {
-        var root = this;
-        for (var key in obj) {
-          var value = obj[key];
-          if (typeof value === 'object') {
-            root._searchObject(value, query);
-          }
-          if (typeof value === 'array') {
-            root._searchObject(value, query);
-          }
-          if (value === query) {
-            root.set('opened', true);
-          }
-        }
+      _hasActiveChild: function (e) {
+        this.opened = true;
       }
     });
   </script>

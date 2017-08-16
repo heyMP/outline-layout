@@ -59,6 +59,7 @@ Collapsible drawer.
           z-index: 10;
           border-right: 1px solid #c8c8c8;
           overflow: inherit;
+          overflow-y: scroll;
         }
       }
 
@@ -86,7 +87,7 @@ Collapsible drawer.
       <content></content>
     </div>
 
-
+    <iron-media-query query="(min-width: 600px)" query-matches="{{opened}}"></iron-media-query>
   </template>
 
   <script>
