@@ -140,6 +140,15 @@ Collapsible drawer layout with shifting content.
             activeButton.scrollIntoView({'behavior': 'smooth', 'block': 'center', 'inline': 'center'});
           }
         }, 1000);
+        // // The dom-change event signifies when the template has stamped its DOM.
+        // var drawer = this.$.drawer;
+        // drawer.addEventListener('dom-change', function() {
+          // var activeButton = document.querySelector('[data-active-page]');
+          // if (activeButton) {
+          //   activeButton.scrollIntoView({'behavior': 'smooth', 'block': 'center', 'inline': 'center'});
+          // }
+        //   // auto-binding template is ready.
+        // });
       },
     });
   </script>
