@@ -6,6 +6,10 @@
        :host {
         display: block;
       }
+
+      .tab-child {
+        margin-left: 10px;
+      }
     </style>
 
     <template is="dom-if" if="[[menu]]">
@@ -13,7 +17,7 @@
         <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]">
           <template is="dom-if" if="[[menu.children]]">
             <template is="dom-repeat" items="[[menu.children]]" as="item">
-              <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
+              <outline-drawer-menu class="tab-child" menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
             </template>
           </template>
         </lrndesign-stepper-button>
