@@ -1,6 +1,6 @@
 # \<outline-layout\>
 
-Collapsible drawer layout with shifting content.
+
 
 ## Install the Polymer-CLI
 
