@@ -16,7 +16,7 @@
 
     <template is="dom-if" if="[[menu]]">
       <lrndesign-stepper>
-        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]">
+        <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]" on-click="_buttonClicked">
           <template is="dom-if" if="[[menu.children]]">
             <template is="dom-repeat" items="[[menu.children]]" as="item">
               <outline-drawer-menu class="tab-child" menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
@@ -57,7 +57,6 @@
       ],
       _statusOpened: function (menu, activeUrl) {
         var root = this;
-        console.log(menu.url, activeUrl);
         if (typeof menu !== 'undefined' && menu) {
           if (typeof activeUrl !== 'undefined' && activeUrl) {
             if (activeUrl === menu.url) {
@@ -70,6 +69,16 @@
       },
       _hasActiveChild: function (e) {
         this.opened = true;
+      },
+      _buttonClicked: function (e) {
+        if (this.opened) {
+          var normalizedEvent = Polymer.dom(e);
+          var localTarget = normalizedEvent.localTarget;
+          if (localTarget.tagName === 'LRNDESIGN-STEPPER-BUTTON') {
+            var url = localTarget.getAttribute('data-url');
+            window.location = url;
+          }
+        }
       }
     });
   </script>
