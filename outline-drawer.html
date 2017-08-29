@@ -6,6 +6,7 @@
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../lrndesign-stepper/lrndesign-stepper.html">
+<link rel="import" href="outline-toolbar.html">
 
 <!--
 `outline-drawer`
@@ -77,7 +78,7 @@ Collapsible drawer.
 
 
     <div class="master-container">
-      <app-drawer id="menu" opened="{{opened}}" persistent>
+      <app-drawer id="menu" opened="{{opened}}" persistent$="[[persistent]]">
         <div class="course-title-drawer">Course Outline</div>
         <div class="stepper-button-wrapper">
           <content select="outline-drawer-content"></content>
@@ -102,6 +103,10 @@ Collapsible drawer.
         },
         queryMatches: {
           type: Boolean
+        },
+        persistent: {
+          type: Boolean,
+          computed: '_computePerstent(queryMatches, opened)'
         }
       },
       observers: [
@@ -114,6 +119,30 @@ Collapsible drawer.
         else {
           this.opened = false;
         }
+      },
+      _computePerstent: function (queryMatches) {
+        return queryMatches;
+      },
+      setActiveButtonScrollPosition: function () {
+        var root = this;
+        var activeButton = document.querySelector('[data-active-page]');
+        if (activeButton) {
+          var activeButtonOffset = activeButton.offsetTop;
+          if (root.narrow) {
+            document.body.scrollTop = activeButtonOffset;
+          }
+          else {
+            var appDrawer = root.$$('app-drawer');
+            var contentContainer = appDrawer.querySelector('#contentContainer');
+            contentContainer.scrollTop = activeButtonOffset;
+          }
+        }
+      },
+      ready: function () {
+        var root = this;
+        setTimeout(function() {
+          root.setActiveButtonScrollPosition();
+        }, 100);
       }
 
     });

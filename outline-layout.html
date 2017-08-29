@@ -131,16 +131,7 @@ Collapsible drawer layout with shifting content.
         if (typeof menu !== 'undefined') {
           this.set('menu', menu);
         }
-        console.log(e.detail.response);
-      },
-      ready: function () {
-        setTimeout(function() {
-          var activeButton = document.querySelector('[data-active-page]');
-          if (activeButton) {
-            activeButton.scrollIntoView({'behavior': 'smooth', 'block': 'center', 'inline': 'center'});
-          }
-        }, 100);
-      },
+      }
     });
   </script>
 </dom-module>
