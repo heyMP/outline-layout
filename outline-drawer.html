@@ -87,7 +87,7 @@ Collapsible drawer.
       <content></content>
     </div>
 
-    <!-- <iron-media-query query="(min-width: 600px)" query-matches="{{opened}}"></iron-media-query> -->
+    <iron-media-query query="(min-width: 600px)" query-matches="{{queryMatches}}"></iron-media-query>
   </template>
 
   <script>
@@ -99,8 +99,22 @@ Collapsible drawer.
         opened: {
           type: Boolean,
           reflectToAttribute: true
+        },
+        queryMatches: {
+          type: Boolean
         }
       },
+      observers: [
+        '_queryMatches(queryMatches)'
+      ],
+      _queryMatches: function (queryMatches) {
+        if (queryMatches) {
+          this.opened = true;
+        }
+        else {
+          this.opened = false;
+        }
+      }
 
     });
   </script>
