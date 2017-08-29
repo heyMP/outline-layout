@@ -81,7 +81,7 @@ Collapsible drawer.
       <app-drawer id="menu" opened="{{opened}}" persistent$="[[persistent]]">
         <div class="course-title-drawer">Course Outline</div>
         <div class="stepper-button-wrapper">
-          <content select="outline-drawer-content"></content>
+          <content id="drawercontent" select="outline-drawer-content"></content>
         </div>
       </app-drawer>
       <outline-toolbar main-title="My Course"></outline-toolbar>
@@ -140,9 +140,13 @@ Collapsible drawer.
       },
       ready: function () {
         var root = this;
-        setTimeout(function() {
-          root.setActiveButtonScrollPosition();
-        }, 100);
+        // crazy observer to check when menu items have been added.
+        // when they do, we need to reset the scroll position.
+        root._observer = Polymer.dom(this.$.drawercontent).observeNodes(function(info) {
+          setTimeout(function() {
+            root.setActiveButtonScrollPosition();
+          }, 100);
+        });
       }
 
     });
