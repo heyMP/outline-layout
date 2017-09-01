@@ -17,7 +17,7 @@
         <lrndesign-stepper-button class="tab" title="[[menu.title]]" icon="[[menu.icon]]" data-url$="[[menu.url]]" data-active-page$="[[isActivePage]]" opened="[[opened]]" on-click="_buttonClicked">
           <template is="dom-if" if="[[menu.children]]">
             <template is="dom-repeat" items="[[menu.children]]" as="item">
-              <outline-drawer-menu class="tab-child" menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
+              <outline-drawer-menu class="tab-child" menu="[[item]]" active-url="[[activeUrl]]" page-title="{{pageTitle}}"></outline-drawer-menu>
             </template>
           </template>
         </lrndesign-stepper-button>
@@ -45,6 +45,11 @@
         isActivePage: {
           type: Boolean,
           value: false
+        },
+        pageTitle: {
+          type: String,
+          notify: true,
+          reflectiveToAttribute: true
         }
       },
       listeners: {
@@ -61,6 +66,7 @@
               root.opened = true;
               root.isActivePage = true;
               root.fire('active-child');
+              this.pageTitle = menu.title;
             }
           }
         }

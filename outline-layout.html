@@ -35,7 +35,7 @@ Collapsible drawer layout with shifting content.
       }
     </style>
 
-    <outline-drawer id="drawer">
+    <outline-drawer id="drawer" page-title="{{pageTitle}}">
 
       <!--Pages-->
       <div class="outline-content">
@@ -57,7 +57,7 @@ Collapsible drawer layout with shifting content.
           <div>
             <template is="dom-if" if="[[menu]]">
               <template is="dom-repeat" items="[[menu]]" as="item">
-                <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]"></outline-drawer-menu>
+                <outline-drawer-menu menu="[[item]]" active-url="[[activeUrl]]" page-title="{{pageTitle}}"></outline-drawer-menu>
               </template>
             </template>
           </div>
@@ -102,6 +102,11 @@ Collapsible drawer layout with shifting content.
         isDesktop: {
           type: Boolean,
           value: false
+        },
+        pageTitle: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true
         }
       },
       observer: [

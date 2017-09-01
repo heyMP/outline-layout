@@ -84,7 +84,7 @@ Collapsible drawer.
           <content id="drawercontent" select="outline-drawer-content"></content>
         </div>
       </app-drawer>
-      <outline-toolbar main-title="My Course"></outline-toolbar>
+      <outline-toolbar main-title="{{pageTitle}}"></outline-toolbar>
       <content></content>
     </div>
 
@@ -97,6 +97,11 @@ Collapsible drawer.
       is: 'outline-drawer',
 
       properties: {
+        pageTitle: {
+          type: String,
+          notify: true,
+          reflectiveToAttribute: true
+        },
         opened: {
           type: Boolean,
           reflectToAttribute: true
@@ -109,9 +114,15 @@ Collapsible drawer.
           computed: '_computePerstent(queryMatches, opened)'
         }
       },
+      listeners: {
+        'set-page-title': '_setPageTitle'
+      },
       observers: [
-        '_queryMatches(queryMatches)'
+        '_queryMatches(queryMatches)',
       ],
+      _setPageTitle: function (e) {
+        console.log(e);
+      },
       _queryMatches: function (queryMatches) {
         if (queryMatches) {
           this.opened = true;
